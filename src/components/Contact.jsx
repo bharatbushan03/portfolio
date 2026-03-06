@@ -44,7 +44,7 @@ const Contact = () => {
                                 </div>
                                 <div>
                                     <h4>Email</h4>
-                                    <p>engineering@example.com</p>
+                                    <p>bharatbushan5320@gmail.com</p>
                                 </div>
                             </div>
 
@@ -54,7 +54,7 @@ const Contact = () => {
                                 </div>
                                 <div>
                                     <h4>Location</h4>
-                                    <p>San Francisco, CA (Remote)</p>
+                                    <p>Jammu, J&K (Remote)</p>
                                 </div>
                             </div>
 
@@ -72,7 +72,7 @@ const Contact = () => {
                                     value={formData.name}
                                     onChange={handleChange}
                                     required
-                                    placeholder="John Doe"
+                                    placeholder="Rajeev Sharma"
                                 />
                             </div>
 
@@ -85,7 +85,7 @@ const Contact = () => {
                                     value={formData.email}
                                     onChange={handleChange}
                                     required
-                                    placeholder="john@example.com"
+                                    placeholder="raju@example.com"
                                 />
                             </div>
 

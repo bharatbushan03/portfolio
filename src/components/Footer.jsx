@@ -11,7 +11,7 @@ const Footer = () => {
                     <span className="logo-text">Portfolio.</span>
                 </div>
                 <p className="footer-text">
-                    &copy; {new Date().getFullYear()} Designed & Built by a System Architect
+                    &copy; {new Date().getFullYear()} Designed & Built by Bharat Lashotra
                 </p>
             </div>
         </footer>

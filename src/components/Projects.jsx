@@ -44,7 +44,7 @@ const Projects = () => {
                 <h2 className="section-title reveal">Featured Works</h2>
 
                 <div className="projects-grid">
-                    {projects.map((project, index) => (
+                    {projects.map((project) => (
                         <div
                             key={project.title}
                             className={`project-card glass reveal ${project.featured ? 'featured' : ''}`}
