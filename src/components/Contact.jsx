@@ -3,7 +3,11 @@ import { Send, Mail, MapPin } from 'lucide-react';
 import './Contact.css';
 
 const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL;
-const CONTACT_EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_VALIDATION_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const HAS_VALID_CONTACT_EMAIL = EMAIL_VALIDATION_PATTERN.test(CONTACT_EMAIL || '');
+const DISPLAY_EMAIL = HAS_VALID_CONTACT_EMAIL
+    ? CONTACT_EMAIL.replaceAll('@', ' [at] ').replaceAll('.', ' [dot] ')
+    : 'Set VITE_CONTACT_EMAIL in .env.local';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -14,14 +18,10 @@ const Contact = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitMessage, setSubmitMessage] = useState('');
     const [submitError, setSubmitError] = useState(false);
-    const hasValidContactEmail = CONTACT_EMAIL_REGEX.test(CONTACT_EMAIL || '');
-    const displayEmail = hasValidContactEmail
-        ? CONTACT_EMAIL.replace('@', ' [at] ').replaceAll('.', ' [dot] ')
-        : 'Set VITE_CONTACT_EMAIL in .env.local';
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!hasValidContactEmail) {
+        if (!HAS_VALID_CONTACT_EMAIL) {
             setSubmitError(true);
             setSubmitMessage('Contact form is not configured yet. Please try again later.');
             return;
@@ -90,7 +90,7 @@ const Contact = () => {
                                 </div>
                                 <div>
                                     <h4>Email</h4>
-                                    <p>{displayEmail}</p>
+                                    <p>{DISPLAY_EMAIL}</p>
                                 </div>
                             </div>
 
