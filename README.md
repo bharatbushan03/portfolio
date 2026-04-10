@@ -23,3 +23,6 @@ Set the destination email in a local env file before running the app:
 ```bash
 echo "VITE_CONTACT_EMAIL=your-email@example.com" > .env.local
 ```
+
+After the first submission, FormSubmit sends an activation email to the destination inbox.  
+Open that email and confirm activation (check spam/promotions too), otherwise messages will not be delivered.

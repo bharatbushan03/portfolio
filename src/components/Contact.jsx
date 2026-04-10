@@ -42,13 +42,18 @@ const Contact = () => {
                     name: formData.name,
                     email: formData.email,
                     message: formData.message,
+                    _replyto: formData.email,
                     _subject: 'New portfolio contact form submission',
-                    _template: 'table'
+                    _template: 'table',
+                    _captcha: 'false'
                 })
             });
 
-            if (!response.ok) {
-                throw new Error(`Failed to send message (HTTP ${response.status})`);
+            const responseData = await response.json().catch(() => null);
+            const responseMessage = responseData?.message || '';
+
+            if (!response.ok || responseData?.success === false) {
+                throw new Error(responseMessage || `Failed to send message (HTTP ${response.status})`);
             }
 
             setSubmitMessage('Thank you for your message. I will get back to you soon!');
@@ -56,7 +61,13 @@ const Contact = () => {
         } catch (error) {
             console.error('Contact form submission failed:', error);
             setSubmitError(true);
-            setSubmitMessage('Unable to send your message right now. Please try again later.');
+            const details = error instanceof Error ? error.message.toLowerCase() : '';
+            const needsActivation = details.includes('activate') || details.includes('activation');
+            setSubmitMessage(
+                needsActivation
+                    ? 'Email delivery is pending activation. Please check the FormSubmit activation email (and spam folder) for your destination inbox.'
+                    : 'Unable to send your message right now. Please try again later.'
+            );
         } finally {
             setIsSubmitting(false);
         }
