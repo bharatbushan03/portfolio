@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Send, Mail, MapPin } from 'lucide-react';
 import './Contact.css';
 
+const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL || 'bharatbushan5320@gmail.com';
+
 const Contact = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -19,7 +21,7 @@ const Contact = () => {
         setSubmitError(false);
 
         try {
-            const response = await fetch('https://formsubmit.co/ajax/bharatbushan5320@gmail.com', {
+            const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -40,7 +42,8 @@ const Contact = () => {
 
             setSubmitMessage('Thank you for your message. I will get back to you soon!');
             setFormData({ name: '', email: '', message: '' });
-        } catch {
+        } catch (error) {
+            console.error('Contact form submission failed:', error);
             setSubmitError(true);
             setSubmitMessage('Something went wrong. Please try again in a moment.');
         } finally {
@@ -76,7 +79,7 @@ const Contact = () => {
                                 </div>
                                 <div>
                                     <h4>Email</h4>
-                                    <p>bharatbushan5320@gmail.com</p>
+                                    <p>{CONTACT_EMAIL}</p>
                                 </div>
                             </div>
 
