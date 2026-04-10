@@ -49,7 +49,12 @@ const Contact = () => {
                 })
             });
 
-            const responseData = await response.json().catch(() => null);
+            let responseData = null;
+            try {
+                responseData = await response.json();
+            } catch (parseError) {
+                console.error('Unable to parse FormSubmit response JSON:', parseError);
+            }
             const responseMessage = responseData?.message || '';
 
             if (!response.ok || responseData?.success === false) {
