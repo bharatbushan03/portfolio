@@ -8,12 +8,44 @@ const Contact = () => {
         email: '',
         message: ''
     });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitMessage, setSubmitMessage] = useState('');
+    const [submitError, setSubmitError] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // In a real app, this would send an email or save to a DB
-        alert('Thank you for your message. I will get back to you soon!');
-        setFormData({ name: '', email: '', message: '' });
+        setIsSubmitting(true);
+        setSubmitMessage('');
+        setSubmitError(false);
+
+        try {
+            const response = await fetch('https://formsubmit.co/ajax/bharatbushan5320@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json'
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    message: formData.message,
+                    _subject: 'New portfolio contact form submission',
+                    _template: 'table'
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to send message');
+            }
+
+            setSubmitMessage('Thank you for your message. I will get back to you soon!');
+            setFormData({ name: '', email: '', message: '' });
+        } catch {
+            setSubmitError(true);
+            setSubmitMessage('Something went wrong. Please try again in a moment.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const handleChange = (e) => {
@@ -102,9 +134,18 @@ const Contact = () => {
                                 ></textarea>
                             </div>
 
-                            <button type="submit" className="btn btn-primary submit-btn">
-                                Send Message <Send size={18} />
+                            <button type="submit" className="btn btn-primary submit-btn" disabled={isSubmitting}>
+                                {isSubmitting ? 'Sending...' : 'Send Message'} <Send size={18} />
                             </button>
+                            {submitMessage ? (
+                                <p
+                                    role="status"
+                                    aria-live="polite"
+                                    style={{ marginTop: '12px', color: submitError ? '#ef4444' : '#22c55e' }}
+                                >
+                                    {submitMessage}
+                                </p>
+                            ) : null}
                         </form>
                     </div>
                 </div>
