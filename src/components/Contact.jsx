@@ -53,7 +53,7 @@ const Contact = () => {
             try {
                 responseData = await response.json();
             } catch (parseError) {
-                console.error('Unable to parse FormSubmit response JSON:', parseError);
+                console.error(`Unable to parse FormSubmit response JSON (HTTP ${response.status}):`, parseError);
             }
             const responseMessage = responseData?.message || '';
 
