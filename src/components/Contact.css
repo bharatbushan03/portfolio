@@ -105,6 +105,18 @@
     margin-top: 1rem;
 }
 
+.submit-status {
+    margin-top: 12px;
+}
+
+.submit-status--success {
+    color: #22c55e;
+}
+
+.submit-status--error {
+    color: #ef4444;
+}
+
 @media (max-width: 968px) {
     .contact-container {
         flex-direction: column;

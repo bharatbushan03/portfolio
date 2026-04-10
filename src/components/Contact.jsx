@@ -2,18 +2,64 @@ import React, { useState } from 'react';
 import { Send, Mail, MapPin } from 'lucide-react';
 import './Contact.css';
 
+const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL;
+const EMAIL_VALIDATION_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const HAS_VALID_CONTACT_EMAIL = EMAIL_VALIDATION_PATTERN.test(CONTACT_EMAIL || '');
+const DISPLAY_EMAIL = HAS_VALID_CONTACT_EMAIL
+    ? CONTACT_EMAIL.replaceAll('@', ' [at] ').replaceAll('.', ' [dot] ')
+    : 'Set VITE_CONTACT_EMAIL in .env.local';
+
 const Contact = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         message: ''
     });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitMessage, setSubmitMessage] = useState('');
+    const [submitError, setSubmitError] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // In a real app, this would send an email or save to a DB
-        alert('Thank you for your message. I will get back to you soon!');
-        setFormData({ name: '', email: '', message: '' });
+        if (!HAS_VALID_CONTACT_EMAIL) {
+            setSubmitError(true);
+            setSubmitMessage('Contact form is not configured yet. Please try again later.');
+            return;
+        }
+
+        setIsSubmitting(true);
+        setSubmitMessage('');
+        setSubmitError(false);
+
+        try {
+            const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json'
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    message: formData.message,
+                    _subject: 'New portfolio contact form submission',
+                    _template: 'table'
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to send message (HTTP ${response.status})`);
+            }
+
+            setSubmitMessage('Thank you for your message. I will get back to you soon!');
+            setFormData({ name: '', email: '', message: '' });
+        } catch (error) {
+            console.error('Contact form submission failed:', error);
+            setSubmitError(true);
+            setSubmitMessage('Unable to send your message right now. Please try again later.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const handleChange = (e) => {
@@ -44,7 +90,7 @@ const Contact = () => {
                                 </div>
                                 <div>
                                     <h4>Email</h4>
-                                    <p>bharatbushan5320@gmail.com</p>
+                                    <p>{DISPLAY_EMAIL}</p>
                                 </div>
                             </div>
 
@@ -102,9 +148,18 @@ const Contact = () => {
                                 ></textarea>
                             </div>
 
-                            <button type="submit" className="btn btn-primary submit-btn">
-                                Send Message <Send size={18} />
+                            <button type="submit" className="btn btn-primary submit-btn" disabled={isSubmitting}>
+                                {isSubmitting ? 'Sending...' : 'Send Message'} <Send size={18} />
                             </button>
+                            {submitMessage ? (
+                                <p
+                                    role="status"
+                                    aria-live="polite"
+                                    className={`submit-status ${submitError ? 'submit-status--error' : 'submit-status--success'}`}
+                                >
+                                    {submitMessage}
+                                </p>
+                            ) : null}
                         </form>
                     </div>
                 </div>
