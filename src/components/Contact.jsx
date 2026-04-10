@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Send, Mail, MapPin } from 'lucide-react';
 import './Contact.css';
 
-const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL || 'bharatbushan5320@gmail.com';
+const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL;
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -16,6 +16,12 @@ const Contact = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!CONTACT_EMAIL) {
+            setSubmitError(true);
+            setSubmitMessage('Contact form is not configured yet. Please try again later.');
+            return;
+        }
+
         setIsSubmitting(true);
         setSubmitMessage('');
         setSubmitError(false);
@@ -37,7 +43,7 @@ const Contact = () => {
             });
 
             if (!response.ok) {
-                throw new Error('Failed to send message');
+                throw new Error(`Failed to send message (HTTP ${response.status})`);
             }
 
             setSubmitMessage('Thank you for your message. I will get back to you soon!');
@@ -79,7 +85,7 @@ const Contact = () => {
                                 </div>
                                 <div>
                                     <h4>Email</h4>
-                                    <p>{CONTACT_EMAIL}</p>
+                                    <p>{CONTACT_EMAIL || 'Set VITE_CONTACT_EMAIL in .env.local'}</p>
                                 </div>
                             </div>
 
@@ -144,7 +150,7 @@ const Contact = () => {
                                 <p
                                     role="status"
                                     aria-live="polite"
-                                    style={{ marginTop: '12px', color: submitError ? '#ef4444' : '#22c55e' }}
+                                    className={`submit-status ${submitError ? 'submit-status--error' : 'submit-status--success'}`}
                                 >
                                     {submitMessage}
                                 </p>
