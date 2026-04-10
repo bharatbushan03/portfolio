@@ -57,8 +57,16 @@ const Contact = () => {
             }
             const responseMessage = responseData?.message || '';
 
-            if (!response.ok || responseData?.success === false) {
+            if (!response.ok) {
                 throw new Error(responseMessage || `Failed to send message (HTTP ${response.status})`);
+            }
+
+            if (!responseData) {
+                throw new Error('Received an invalid response from the contact service.');
+            }
+
+            if (responseData.success === false) {
+                throw new Error(responseMessage || 'Contact service rejected the message.');
             }
 
             setSubmitMessage('Thank you for your message. I will get back to you soon!');
