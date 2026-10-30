@@ -1,0 +1,182 @@
+.experience-section {
+    background: var(--bg-secondary);
+}
+
+.role-panel {
+    margin-top: 2.5rem;
+    padding: 1.75rem;
+    border-radius: 20px;
+}
+
+.role-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.role-identity {
+    display: flex;
+    gap: 0.9rem;
+    align-items: center;
+}
+
+.role-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    color: var(--accent-color);
+    background: rgba(99, 102, 241, 0.12);
+    flex-shrink: 0;
+}
+
+.role-identity h3 {
+    font-size: 1.35rem;
+}
+
+.role-identity p,
+.role-dates,
+.intern-card span,
+.edu-line,
+.leadership span {
+    color: var(--text-secondary);
+}
+
+.role-dates {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.82rem;
+    margin-top: 0.35rem;
+}
+
+.role-projects {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.intern-card {
+    padding: 1.25rem;
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid var(--glass-border);
+}
+
+.intern-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    align-items: baseline;
+    margin-bottom: 0.75rem;
+}
+
+.intern-top h4 {
+    font-size: 1.05rem;
+}
+
+.intern-top span,
+.intern-note {
+    font-size: 0.75rem;
+    font-family: 'Fira Code', monospace;
+}
+
+.intern-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.intern-card ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    list-style: none;
+    margin-bottom: 1rem;
+}
+
+.intern-card li {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+}
+
+.intern-card a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.intern-note {
+    color: var(--text-secondary);
+}
+
+.edu-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.92rem;
+}
+
+.leadership {
+    margin-top: 2rem;
+}
+
+.leadership h3 {
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.leadership ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.7rem;
+    list-style: none;
+}
+
+.leadership li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 12px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    min-width: 180px;
+}
+
+.leadership strong {
+    font-size: 0.88rem;
+}
+
+.leadership span {
+    font-size: 0.75rem;
+}
+
+@media (max-width: 800px) {
+    .role-head,
+    .role-projects,
+    .intern-top {
+        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .edu-line {
+        align-items: flex-start;
+    }
+}

@@ -1,0 +1,29 @@
+.certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1rem;
+    margin-top: 2.5rem;
+}
+
+.cert-card {
+    padding: 1.25rem;
+    border-radius: 16px;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.cert-card svg {
+    color: var(--accent-color);
+}
+
+.cert-card h3 {
+    font-size: 1.05rem;
+}
+
+.cert-card p {
+    margin-top: auto;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}

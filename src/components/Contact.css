@@ -58,6 +58,15 @@
     color: var(--text-secondary);
 }
 
+.info-item a {
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+
+.info-item a:hover {
+    color: var(--accent-color);
+}
+
 .contact-form-container {
     flex: 1;
     padding: 3rem;

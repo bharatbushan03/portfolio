@@ -1,0 +1,126 @@
+.stage-wrap {
+    position: relative;
+    height: 520px;
+    margin: 2rem 0 3.5rem;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    background:
+        radial-gradient(circle at 50% 58%, rgba(99, 102, 241, 0.22), transparent 42%),
+        #07070b;
+    cursor: grab;
+    touch-action: pan-y;
+}
+
+.stage-wrap:active {
+    cursor: grabbing;
+}
+
+.css-stage {
+    height: 100%;
+    display: grid;
+    place-items: center;
+    perspective: 1200px;
+}
+
+.css-ring {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    transform-style: preserve-3d;
+}
+
+.stage-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 1rem;
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    pointer-events: none;
+}
+
+.stage-card {
+    position: absolute;
+    inset: 0;
+    width: 250px;
+    height: 250px;
+    padding: 1rem 1rem 0.85rem;
+    border-radius: 16px;
+    background: #12121a;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-top: 2px solid var(--card-accent, var(--accent-color));
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    color: var(--text-primary);
+    text-align: left;
+    backface-visibility: hidden;
+}
+
+.stage-kicker {
+    margin: 0 0 0.35rem;
+    color: var(--card-accent, var(--accent-color));
+    font-family: 'Fira Code', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.stage-card h3 {
+    margin: 0 0 0.4rem;
+    font-size: 1.05rem;
+}
+
+.stage-blurb,
+.stage-tags,
+.stage-links {
+    margin: 0;
+}
+
+.stage-blurb {
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    line-height: 1.45;
+}
+
+.stage-tags {
+    margin-top: 0.55rem;
+    color: #d4d4d8;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.68rem;
+}
+
+.stage-links {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.7rem;
+}
+
+.stage-links a {
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.stage-links a:hover {
+    color: var(--card-accent, var(--accent-color));
+}
+
+@media (max-width: 768px) {
+    .stage-wrap {
+        height: 440px;
+    }
+
+    .css-ring,
+    .stage-card {
+        width: 210px;
+        height: 230px;
+    }
+
+    .stage-card {
+        width: 210px;
+    }
+}

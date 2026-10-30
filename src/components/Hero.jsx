@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowRight, Github, Linkedin, Mail, Code2 } from 'lucide-react';
+import React, { lazy, Suspense, useState, useEffect } from 'react';
+import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
+import { CONTACT_EMAIL, heroStats } from '../data/portfolio';
 import './Hero.css';
 
-const TYPING_STRINGS = ['Engineer', 'AI Builder', 'System Architect', 'ML Practitioner'];
+const HeroScene = lazy(() => import('./HeroScene'));
+
+const TYPING_STRINGS = ['Generative AI Developer', 'Agentic Systems', 'LLM Engineering', 'Machine Learning'];
 
 const Hero = () => {
     const [typed, setTyped] = useState('');
@@ -51,13 +54,17 @@ const Hero = () => {
                     </div>
 
                     <h1 className="hero-title">
-                        <span className="text-gradient typing-text">{typed}<span className="cursor-blink">|</span></span><br />
-                        System Architect.
+                        Bharat Bushan<br />
+                        <span className="text-gradient">Lashotra</span>
                     </h1>
+                    <p className="hero-role">
+                        <span className="text-gradient">{typed}</span>
+                        <span className="cursor-blink">|</span>
+                    </p>
 
                     <p className="hero-description">
-                        I build highly scalable systems, advanced ML models, and elegant web interfaces.
-                        Transforming complex technical challenges into robust, premium solutions.
+                        I build agentic systems, RAG products, and machine learning tools.
+                        Recent work includes a self-defending language model, a carpool app, and campus AI assistants.
                     </p>
 
                     <div className="hero-actions">
@@ -78,69 +85,29 @@ const Hero = () => {
                             <Linkedin size={20} />
                             <span className="social-tooltip">LinkedIn</span>
                         </a>
-                        <a href="mailto:bharatbushan5320@gmail.com" className="social-icon" aria-label="Email">
+                        <a href={`mailto:${CONTACT_EMAIL}`} className="social-icon" aria-label="Email">
                             <Mail size={20} />
                             <span className="social-tooltip">Email</span>
                         </a>
                     </div>
 
                     <div className="stats-row">
-                        <div className="stat-item">
-                            <span className="stat-number">1+</span>
-                            <span className="stat-label">Years Exp.</span>
-                        </div>
-                        <div className="stat-divider"></div>
-                        <div className="stat-item">
-                            <span className="stat-number">20+</span>
-                            <span className="stat-label">Projects</span>
-                        </div>
-                        <div className="stat-divider"></div>
-                        <div className="stat-item">
-                            <span className="stat-number">∞</span>
-                            <span className="stat-label">Curiosity</span>
-                        </div>
+                        {heroStats.map((stat, index) => (
+                            <React.Fragment key={stat.label}>
+                                {index > 0 ? <div className="stat-divider"></div> : null}
+                                <div className="stat-item">
+                                    <span className="stat-number">{stat.value}</span>
+                                    <span className="stat-label">{stat.label}</span>
+                                </div>
+                            </React.Fragment>
+                        ))}
                     </div>
                 </div>
 
-                <div className="hero-visual reveal relative">
-                    <div className="glass code-card code-card-1">
-                        <div className="card-header">
-                            <div className="dots">
-                                <span></span><span></span><span></span>
-                            </div>
-                            <span className="card-filename">buildSystem.js</span>
-                        </div>
-                        <pre><code>
-                            <span className="code-keyword">async function</span> <span className="code-func">buildSystem</span>() {'{'}
-                            <span className="code-keyword">const</span> ai = <span className="code-keyword">await</span> <span className="code-func">loadModel</span>();
-                            <span className="code-keyword">const</span> ui = <span className="code-keyword">new</span> <span className="code-class">Interface</span>();
-
-                            <span className="code-keyword">return</span> <span className="code-func">deploy</span>(ai, ui);
-                            {'}'}
-                        </code></pre>
-                    </div>
-                    <div className="glass code-card code-card-2">
-                        <div className="card-header">
-                            <div className="dots">
-                                <span></span><span></span><span></span>
-                            </div>
-                            <span className="card-filename">neural_net.py</span>
-                        </div>
-                        <pre><code style={{ display: 'block', whiteSpace: 'pre' }}>
-                            <span className="code-keyword">class</span> <span className="code-class">NeuralNet</span>:{'\n'}
-                            {'  '}<span className="code-keyword">def</span> <span className="code-func">__init__</span>(self):{'\n'}
-                            {'    '}self.layers = [<span className="code-string">"input"</span>, <span className="code-string">"output"</span>]{'\n'}
-                            {'\n'}
-                            {'  '}<span className="code-keyword">def</span> <span className="code-func">train</span>(self, data):{'\n'}
-                            {'    '}<span className="code-keyword">return</span> <span className="code-string">"Optimization complete"</span>
-                        </code></pre>
-                    </div>
-
-                    <div className="orbit-ring">
-                        <div className="orbit-icon orbit-1"><Code2 size={16} /></div>
-                        <div className="orbit-icon orbit-2">🧠</div>
-                        <div className="orbit-icon orbit-3">⚡</div>
-                    </div>
+                <div className="hero-visual reveal">
+                    <Suspense fallback={<div className="hero-canvas" />}>
+                        <HeroScene />
+                    </Suspense>
                 </div>
             </div>
         </section>

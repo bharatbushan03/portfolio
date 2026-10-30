@@ -118,15 +118,18 @@
 }
 
 .hero-title {
-    font-size: 4.5rem;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
+    font-size: clamp(2.6rem, 4.6vw, 4rem);
+    line-height: 1.05;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.03em;
 }
 
-.typing-text {
-    display: inline-block;
-    min-width: 260px;
+.hero-role {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1.25rem, 2vw, 1.7rem);
+    font-weight: 600;
+    min-height: 2.2rem;
+    margin-bottom: 1.25rem;
 }
 
 .cursor-blink {
@@ -248,187 +251,11 @@
     background: var(--glass-border);
 }
 
-/* Visual / Code Cards */
 .hero-visual {
     flex: 1;
     position: relative;
     height: 520px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.relative {
-    position: relative;
-}
-
-.code-card {
-    padding: 1.5rem;
-    border-radius: 14px;
-    font-family: 'Fira Code', 'Courier New', Courier, monospace;
-    font-size: 0.82rem;
-    position: absolute;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    background: rgba(10, 10, 10, 0.8);
     min-width: 280px;
-}
-
-.code-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(99, 102, 241, 0.2);
-}
-
-.code-card-1 {
-    top: 5%;
-    left: -20%;
-    z-index: 2;
-    animation: float-card 6s infinite ease-in-out;
-}
-
-.code-card-2 {
-    bottom: 10%;
-    right: 5%;
-    z-index: 1;
-    animation: float-card 8s infinite ease-in-out reverse;
-}
-
-@keyframes float-card {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-15px);
-    }
-}
-
-.card-header {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid var(--glass-border);
-    padding-bottom: 0.6rem;
-}
-
-.card-filename {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    margin-left: auto;
-}
-
-.dots {
-    display: flex;
-    gap: 0.4rem;
-}
-
-.dots span {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-}
-
-.dots span:nth-child(1) {
-    background: #ff5f56;
-}
-
-.dots span:nth-child(2) {
-    background: #ffbd2e;
-}
-
-.dots span:nth-child(3) {
-    background: #27c93f;
-}
-
-code {
-    color: #d4d4d4;
-    line-height: 1.7;
-    display: block;
-}
-
-.code-keyword {
-    color: #569cd6;
-}
-
-.code-func {
-    color: #dcdcaa;
-}
-
-.code-string {
-    color: #ce9178;
-}
-
-.code-class {
-    color: #4ec9b0;
-}
-
-/* Orbit Ring */
-.orbit-ring {
-    position: absolute;
-    width: 220px;
-    height: 220px;
-    border: 1px dashed rgba(99, 102, 241, 0.25);
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: spin 18s linear infinite;
-    z-index: 0;
-}
-
-@keyframes spin {
-    from {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-
-    to {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
-}
-
-.orbit-icon {
-    position: absolute;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    animation: counter-spin 18s linear infinite;
-}
-
-@keyframes counter-spin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(-360deg);
-    }
-}
-
-.orbit-1 {
-    top: -18px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.orbit-2 {
-    top: 50%;
-    right: -18px;
-    transform: translateY(-50%);
-}
-
-.orbit-3 {
-    bottom: -18px;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 /* Responsive */
@@ -439,7 +266,7 @@ code {
     }
 
     .hero-title {
-        font-size: 3.5rem;
+        font-size: 3rem;
     }
 
     .hero-description {
@@ -454,32 +281,16 @@ code {
 
     .hero-visual {
         width: 100%;
-        height: 380px;
-    }
-
-    .code-card-1 {
-        left: 5%;
-    }
-
-    .code-card-2 {
-        right: 5%;
+        height: 360px;
     }
 }
 
 @media (max-width: 576px) {
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.4rem;
     }
 
-    .typing-text {
-        min-width: 180px;
-    }
-
-    .code-card {
-        display: none;
-    }
-
-    .orbit-ring {
-        display: none;
+    .hero-visual {
+        height: 280px;
     }
 }

@@ -1,0 +1,71 @@
+.opensource-section {
+    background: var(--bg-secondary);
+}
+
+.oss-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+}
+
+.oss-card {
+    padding: 1.6rem;
+    border-radius: 18px;
+}
+
+.oss-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    color: var(--accent-secondary);
+    background: rgba(168, 85, 247, 0.12);
+    margin-bottom: 1rem;
+}
+
+.oss-org {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.78rem;
+    color: var(--accent-color);
+    margin-bottom: 0.35rem;
+}
+
+.oss-card h3 {
+    font-size: 1.35rem;
+    margin-bottom: 0.75rem;
+}
+
+.oss-card p:last-of-type {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.oss-card ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    list-style: none;
+    margin-bottom: 1.1rem;
+}
+
+.oss-card li {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+}
+
+.oss-card a {
+    color: var(--accent-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+@media (max-width: 800px) {
+    .oss-grid {
+        grid-template-columns: 1fr;
+    }
+}
